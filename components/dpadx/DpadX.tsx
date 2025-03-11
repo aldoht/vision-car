@@ -1,9 +1,24 @@
-import { Text } from "react-native";
+import {StyleSheet, Text, View} from "react-native";
+import { PadStateColor } from "../../interfaces/padStateColor";
 
-export default function DpadX() {
+type padProps = {
+    colors: PadStateColor
+}
+
+const DpadX = (props: padProps)=> {
     return (
-        <div>
-            <Text>DpadX works correctly!</Text>
-        </div>
+        <View style={[styles.container, {backgroundColor: props.colors.idle}]}>
+            <Text>DpadX is working!</Text>
+        </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        padding: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+    }
+})
+
+export default DpadX;

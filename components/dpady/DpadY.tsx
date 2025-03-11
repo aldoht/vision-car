@@ -1,9 +1,24 @@
-import { Text } from "react-native";
+import {StyleSheet, Text, View} from "react-native";
+import { PadStateColor } from "../../interfaces/padStateColor";
 
-export default function DpadY() {
+type padProps = {
+    colors: PadStateColor
+}
+
+const DpadY = (props: padProps)=> {
     return (
-        <div>
+        <View style={[styles.container, {backgroundColor: props.colors.idle}]}>
             <Text>DpadY is working!</Text>
-        </div>
+        </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        padding: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+    }
+})
+
+export default DpadY;
