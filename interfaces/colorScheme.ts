@@ -1,7 +1,10 @@
+import { PadStateColor } from "./padStateColor";
+
 interface ColorScheme {
-    primaryColor: string,
-    secondaryColor: string,
-    tertiaryColor: string
+    consoleColor: string,
+    broadcastColor: string,
+    backgroundColor: string,
+    padColor: PadStateColor
 }
 
 export type { ColorScheme }
