@@ -1,4 +1,5 @@
-import {StyleSheet, View} from "react-native";
+import { useState } from "react";
+import {StyleSheet, View, TouchableOpacity} from "react-native";
 import Svg, { SvgProps, Path } from "react-native-svg"
 import { PadStateColor } from "../../interfaces/padStateColor";
 
@@ -98,18 +99,39 @@ const PadBottomSvg = (props: SvgProps) => (
     </Svg>
 )
 
-const DpadY = (props: padProps)=> {
+const DpadY = (props: padProps) => {
+    const [topPressed, setTopPressed] = useState(false);
+    const [bottomPressed, setBottomPressed] = useState(false);
+
     return (
         <View style={styles.container}>
-            <View style={[styles.pad, styles.padTop, {backgroundColor: props.colors.idle}]}>
+            <TouchableOpacity
+                style={[
+                    styles.pad,
+                    styles.padTop,
+                    {backgroundColor: topPressed ? props.colors.pressed : props.colors.idle}
+                ]}
+                activeOpacity={1}
+                onPressIn={() => setTopPressed(true)}
+                onPressOut={() => setTopPressed(false)}
+            >
                 <PadTopSvg height={150} width={100.143}></PadTopSvg>
-            </View>
-            <View style={[styles.pad, styles.padBottom, {backgroundColor: props.colors.idle}]}>
+            </TouchableOpacity>
+            <TouchableOpacity
+                style={[
+                    styles.pad,
+                    styles.padBottom,
+                    {backgroundColor: bottomPressed ? props.colors.pressed : props.colors.idle}
+                ]}
+                activeOpacity={1}
+                onPressIn={() => setBottomPressed(true)}
+                onPressOut={() => setBottomPressed(false)}
+            >
                 <PadBottomSvg height={150} width={100.143}></PadBottomSvg>
-            </View>
+            </TouchableOpacity>
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
