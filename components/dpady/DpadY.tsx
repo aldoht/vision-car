@@ -8,11 +8,42 @@ type padProps = {
 }
 
 const moveForward = () => {
-    Alert.alert('You are moving forward!');
+    fetch('http://172.20.10.6:3000/send-udp', {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            packet: 2
+        }),
+    });
 };
 const moveBackward = () => {
-    Alert.alert('You are moving backward!');
+    fetch('http://172.20.10.6:3000/send-udp', {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            packet: 3
+        }),
+    });
 };
+
+const stop = () => {
+    fetch('http://172.20.10.6:3000/send-udp', {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            packet: 4
+        }),
+    });
+}
 
 const PadTopSvg = (props: SvgProps) => (
     <Svg
@@ -120,8 +151,14 @@ const DpadY = (props: padProps) => {
                 ]}
                 onLongPress={moveForward}
                 activeOpacity={1}
-                onPressIn={() => setTopPressed(true)}
-                onPressOut={() => setTopPressed(false)}
+                onPressIn={() => {
+                    setTopPressed(true)
+                    moveForward()
+                }}
+                onPressOut={() => {
+                    setTopPressed(false)
+                    stop()
+                }}
             >
                 <PadTopSvg height={150} width={100.143}></PadTopSvg>
             </TouchableOpacity>
@@ -133,8 +170,14 @@ const DpadY = (props: padProps) => {
                 ]}
                 onLongPress={moveBackward}
                 activeOpacity={1}
-                onPressIn={() => setBottomPressed(true)}
-                onPressOut={() => setBottomPressed(false)}
+                onPressIn={() => {
+                    setBottomPressed(true)
+                    moveBackward()
+                }}
+                onPressOut={() => {
+                    setBottomPressed(false)
+                    stop()
+                }}
             >
                 <PadBottomSvg height={150} width={100.143}></PadBottomSvg>
             </TouchableOpacity>

@@ -8,11 +8,42 @@ type padProps = {
 }
 
 const moveLeft = () => {
-    Alert.alert('You are moving left!');
+    fetch('http://172.20.10.6:3000/send-udp', {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            packet: 1
+        }),
+    });
 };
 const moveRight = () => {
-    Alert.alert('You are moving right!');
+    fetch('http://172.20.10.6:3000/send-udp', {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            packet: 0
+        }),
+    });
 };
+
+const stop = () => {
+    fetch('http://172.20.10.6:3000/send-udp', {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            packet: 5
+        }),
+    });
+}
 
 const PadLeftSvg = (props: SvgProps)=> (
     <Svg
@@ -108,10 +139,14 @@ const DpadX = (props: padProps)=> {
                     styles.padLeft,
                     {backgroundColor: leftPressed ? props.colors.pressed : props.colors.idle}
                 ]}
-                onLongPress={moveLeft}
                 activeOpacity={1}
-                onPressIn={() => setLeftPressed(true)}
-                onPressOut={() => setLeftPressed(false)}
+                onPressIn={() => {
+                    setLeftPressed(true)
+                    moveLeft()
+                }}
+                onPressOut={() => {
+                    setLeftPressed(false)
+                }}
             >
                 <PadLeftSvg height={100.143} width={150}></PadLeftSvg>
             </TouchableOpacity>
@@ -123,8 +158,13 @@ const DpadX = (props: padProps)=> {
                 ]}
                 onLongPress={moveRight}
                 activeOpacity={1}
-                onPressIn={() => setRightPressed(true)}
-                onPressOut={() => setRightPressed(false)}
+                onPressIn={() => {
+                    setRightPressed(true)
+                    moveRight()
+                }}
+                onPressOut={() => {
+                    setRightPressed(false)
+                }}
             >
                 <PadRightSvg height={100.143} width={150}></PadRightSvg>
             </TouchableOpacity>
