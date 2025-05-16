@@ -6,19 +6,23 @@ import { ColorScheme } from "./interfaces/colorScheme";
 
 const colorPalette: {[name: string] : ColorScheme } = {
   'yellowOrange': {
-    consoleColor: '#FB940B',
-    broadcastColor: '#B06808',
-    backgroundColor: '#CC0001',
+    consoleColor: '#FFB300',
+    broadcastColor: '#CC8400',
+    backgroundColor: '#3B1C00',
     padColor: {
-      idle: '#8F0001',
-      pressed: '#520000'
+      idle: '#5A2D00',
+      pressed: '#2E1500'
     }
   },
-  // 'blueSurf': {
-  //   consoleColor: '#0000FE',
-  //   broadcastColor: '#03C0C6',
-  //   backgroundColor: '#000000'
-  // }
+  'blueSurf': {
+    consoleColor: '#0078F0',
+    broadcastColor: '#00B0B8',
+    backgroundColor: '#1A1A1A',
+    padColor: {
+      idle: '#00284D',
+      pressed: '#001320'
+    }
+  }
 }
 
 const styles = StyleSheet.create({
