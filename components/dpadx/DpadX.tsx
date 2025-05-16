@@ -1,4 +1,4 @@
-import {StyleSheet, TouchableOpacity, View} from "react-native";
+import {Alert, StyleSheet, TouchableHighlight, TouchableOpacity, View} from "react-native";
 import { PadStateColor } from "../../interfaces/padStateColor";
 import Svg, { SvgProps, Path } from "react-native-svg"
 import {useState} from "react";
@@ -6,6 +6,13 @@ import {useState} from "react";
 type padProps = {
     colors: PadStateColor
 }
+
+const moveLeft = () => {
+    Alert.alert('You are moving left!');
+};
+const moveRight = () => {
+    Alert.alert('You are moving right!');
+};
 
 const PadLeftSvg = (props: SvgProps)=> (
     <Svg
@@ -101,6 +108,7 @@ const DpadX = (props: padProps)=> {
                     styles.padLeft,
                     {backgroundColor: leftPressed ? props.colors.pressed : props.colors.idle}
                 ]}
+                onLongPress={moveLeft}
                 activeOpacity={1}
                 onPressIn={() => setLeftPressed(true)}
                 onPressOut={() => setLeftPressed(false)}
@@ -113,6 +121,7 @@ const DpadX = (props: padProps)=> {
                     styles.padRight,
                     {backgroundColor: rightPressed ? props.colors.pressed : props.colors.idle}
                 ]}
+                onLongPress={moveRight}
                 activeOpacity={1}
                 onPressIn={() => setRightPressed(true)}
                 onPressOut={() => setRightPressed(false)}
